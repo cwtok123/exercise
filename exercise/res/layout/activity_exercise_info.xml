@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:id="@+id/ScrollView1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="35dp" >
+
+            <Button
+                android:id="@+id/btn_queryInfo"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.50"
+                android:text="查询历史轨迹" />
+
+            <Button
+                android:id="@+id/btn_processed"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.50"
+                android:text="纠偏" />
+
+        </LinearLayout>
+
+        <com.baidu.mapapi.map.MapView
+            android:id="@+id/map_info"
+            android:layout_width="fill_parent"
+            android:layout_height="250dp"
+            android:clickable="true" >
+        </com.baidu.mapapi.map.MapView>
+
+
+        <TextView
+            android:id="@+id/text_infoDistance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="轨迹里程："
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <TextView
+            android:id="@+id/text_infoTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="运动时间："
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <TextView
+            android:id="@+id/text_infoTimebegin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="开始时间："
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <TextView
+            android:id="@+id/text_infoTimeend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="结束时间："
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <TextView
+            android:id="@+id/text_infoAvespeed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="平均速度："
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    </LinearLayout>
+
+</ScrollView>

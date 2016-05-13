@@ -57,8 +57,7 @@ public class ExerciseRecord extends Activity{
 	int gatherInterval = 2;  //位置采集周期 (s)
     int packInterval = 10;  //打包周期 (s)
     
-    static String entityName = "小米4c";  // entity标识
-    static long serviceId = 115376;// 鹰眼服务ID
+
     
     int traceType = 2;  //轨迹服务类型
     private static OnStartTraceListener startTraceListener = null;  //开启轨迹服务监听器
@@ -150,7 +149,7 @@ public class ExerciseRecord extends Activity{
 		 
          client = new LBSTraceClient(getApplicationContext());  //实例化轨迹服务客户端
          
-         trace = new Trace(getApplicationContext(), serviceId, entityName, traceType);  //实例化轨迹服务
+         trace = new Trace(getApplicationContext(), AppApplication.serviceId, AppApplication.entityName, traceType);  //实例化轨迹服务
          
          client.setInterval(gatherInterval, packInterval);  //设置位置采集和打包周期
          
@@ -261,8 +260,6 @@ public class ExerciseRecord extends Activity{
 	 * 查询实时线路
 	 */
 	private void queryRealtimeTrack(){
-		
-		String entityName = this.entityName;
 		String columnKey = "";
 		int returnType = 0;
 		int activeTime = 0;
@@ -270,8 +267,7 @@ public class ExerciseRecord extends Activity{
 		int pageIndex = 1;
 		
 		this.client.queryEntityList(
-				serviceId, 
-				entityName, 
+				AppApplication.serviceId, AppApplication.entityName, 
 				columnKey, 
 				returnType,
 				activeTime, 

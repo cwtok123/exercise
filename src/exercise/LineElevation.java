@@ -51,9 +51,9 @@ public class LineElevation extends Activity implements OnMapClickListener {
     public MyLocationListenner myListener = new MyLocationListenner();
     BitmapDescriptor mCurrentMarker;
     
-	public Button btn1;
-	public Button btn2;
-	public LineChart mLineChart;
+	private Button btn1;
+	private Button btn2;
+	private LineChart mLineChart;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

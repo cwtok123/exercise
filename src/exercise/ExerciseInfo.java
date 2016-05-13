@@ -3,6 +3,8 @@ package exercise;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONException;
+
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BitmapDescriptor;
 import com.baidu.mapapi.map.BitmapDescriptorFactory;
@@ -16,6 +18,8 @@ import com.baidu.mapapi.model.LatLngBounds;
 import com.baidu.trace.LBSTraceClient;
 import com.baidu.trace.OnTrackListener;
 import com.example.exercise.R;
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.data.LineData;
 
 import android.app.Activity;
 import android.graphics.Color;
@@ -35,6 +39,9 @@ import baidu.trackutils.DateDialog.PriorityListener;
 import baidu.trackutils.DateUtils;
 import baidu.trackutils.GsonService;
 import baidu.trackutils.HistoryTrackData;
+import util.DrawCharts;
+import util.VolleyHttp;
+import util.elevationAndPointList;
 
 public class ExerciseInfo extends Activity implements OnClickListener{
 	
@@ -60,7 +67,7 @@ public class ExerciseInfo extends Activity implements OnClickListener{
 
 	MapView mMapView = null;    // 地图View
 	BaiduMap mBaiduMap = null;
-	
+	private LineChart mLineChart;	
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -69,11 +76,14 @@ public class ExerciseInfo extends Activity implements OnClickListener{
 		mMapView = (MapView)findViewById(R.id.map_info);
 		mBaiduMap = mMapView.getMap();
 		
+		mLineChart = (LineChart)findViewById(R.id.chart_info);
+		
         btnDate = (Button) findViewById(R.id.btn_queryInfo);
         btnDate.setOnClickListener(this);
         btnProcessed = (Button) findViewById(R.id.btn_processed);
         btnProcessed.setOnClickListener(this);
         
+        client = new LBSTraceClient(getApplicationContext());
         initOnTrackListener();
 		
 	}
@@ -125,7 +135,7 @@ public class ExerciseInfo extends Activity implements OnClickListener{
         
        
 
-        client.queryHistoryTrack(ExerciseRecord.serviceId, ExerciseRecord.entityName, 
+        this.client.queryHistoryTrack(AppApplication.serviceId, AppApplication.entityName, 
         		simpleReturn, startTime, endTime,pageSize,pageIndex,trackListener);
     }
     
@@ -150,7 +160,7 @@ public class ExerciseInfo extends Activity implements OnClickListener{
         // 分页索引
         int pageIndex = 1;
 
-        client.queryProcessedHistoryTrack(ExerciseRecord.serviceId, ExerciseRecord.entityName, simpleReturn, isProcessed,
+        this.client.queryProcessedHistoryTrack(AppApplication.serviceId, AppApplication.entityName, simpleReturn, isProcessed,
                 startTime, endTime,
                 pageSize,
                 pageIndex,
@@ -282,6 +292,17 @@ public class ExerciseInfo extends Activity implements OnClickListener{
                     .color(Color.RED).points(points);
 
             addMarker();
+            
+            elevationAndPointList HAndPoint = new elevationAndPointList();
+            try {
+				HAndPoint = VolleyHttp.postLineElevation(points);
+			} catch (JSONException e) {
+				// TODO 自动生成的 catch 块
+				e.printStackTrace();
+			}
+            //LineData mLineData = DrawCharts.getData(HAndPoint);
+            LineData mLineData = DrawCharts.getTestData();            
+            DrawCharts.showChart(mLineChart, mLineData);       
 
         }
 

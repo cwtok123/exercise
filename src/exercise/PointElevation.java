@@ -121,15 +121,16 @@ public class PointElevation extends Activity implements OnGetGeoCoderResultListe
 			public void onClick(View v) {
 				// TODO 自动生成的方法存根
 				EditText editCity = (EditText) findViewById(R.id.pointCity);
-				EditText editGeoCodeKey = (EditText) findViewById(R.id.pointAddress);
+				EditText editAddress = (EditText) findViewById(R.id.pointAddress);
 				// Geo搜索
-				if (isNumeric.isNumeric(editCity.getText().toString())==false&isNumeric.isNumeric(editGeoCodeKey.getText().toString())==false)
+				if (isNumeric.isNumeric(editCity.getText().toString())==false&isNumeric.isNumeric(editAddress.getText().toString())==false)
 				{
 				mSearch.geocode(new GeoCodeOption().city(
 						editCity.getText().toString()).address(
-						editGeoCodeKey.getText().toString()));
+						editAddress.getText().toString()));
 				}
-				else if (isNumeric.isNumeric(editCity.getText().toString())==true&isNumeric.isNumeric(editGeoCodeKey.getText().toString())==true){
+				else if (isNumeric.isNumeric(editCity.getText().toString())==true&isNumeric.isNumeric(editAddress.getText().toString())==true)
+				{
 					EditText lat = (EditText) findViewById(R.id.pointCity);
 					EditText lon = (EditText) findViewById(R.id.pointAddress);
 					LatLng ptCenter = new LatLng((Float.valueOf(lat.getText()

@@ -30,10 +30,8 @@ public class VolleyHttp {
 	    public static float h = 0;
 	    public static elevationAndPointList hPoint = new elevationAndPointList();
 	    
-		public static float getPointElevation(double latitude,double longitude) {
-				
-		String url = "http://192.168.1.128:8089/pointtext/servlet/WelcomeUserServlet?lat="+latitude+"&lng="+longitude;
-		
+		public static float getPointElevation(double latitude,double longitude) {				
+		String url = "http://192.168.1.128:8089/pointtext/servlet/WelcomeUserServlet?lat="+latitude+"&lng="+longitude;		
 		JsonObjectRequest pointJson = new JsonObjectRequest(Method.GET,url,null,
 				new Listener<JSONObject>() {
 					@Override

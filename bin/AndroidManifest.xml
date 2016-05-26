@@ -52,6 +52,8 @@
         
         <activity android:name="exercise.LineElevation" 
                   android:label="LineElevation"/>
+        <activity android:name="exercise.PointElevationTest" 
+                  android:label="PointElevation"/> 
         
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"

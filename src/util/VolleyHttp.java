@@ -11,12 +11,14 @@ import com.android.volley.Request.Method;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.utils.CoordinateConverter;
 import com.baidu.mapapi.utils.CoordinateConverter.CoordType;
+import com.baidu.platform.comapi.map.J;
 
 import android.R.array;
 import android.R.string;
@@ -31,8 +33,46 @@ public class VolleyHttp {
 	    public static elevationAndPointList hPoint = new elevationAndPointList();
 	    
 		public static float getPointElevation(double latitude,double longitude) {				
-		String url = "http://192.168.1.128:8089/pointtext/servlet/WelcomeUserServlet?lat="+latitude+"&lng="+longitude;		
-		JsonObjectRequest pointJson = new JsonObjectRequest(Method.GET,url,null,
+		String url = "http://192.168.253.4:8002/return.ashx?lat="+latitude+"&lon="+longitude;
+		//后台改了接口
+		JsonArrayRequest pointJson = new JsonArrayRequest(url,
+				new Listener<JSONArray>() {
+
+					@Override
+					public void onResponse(JSONArray response) {
+						// TODO 自动生成的方法存根
+						Log.e("海拔json", response.toString());
+						JSONObject info = response.optJSONObject(0);
+						try {
+							h = Float.parseFloat(info.getString("height"));
+						} catch (NumberFormatException e) {
+							// TODO 自动生成的 catch 块
+							e.printStackTrace();
+						} catch (JSONException e) {
+							// TODO 自动生成的 catch 块
+							e.printStackTrace();
+						}
+					}
+				}, new ErrorListener() {
+					@Override
+					public void onErrorResponse(VolleyError error) {
+						// TODO 自动生成的方法存根
+						Log.e("后台返回值", error.getMessage(), error);
+						h=0;
+						
+					}
+				});
+		
+		pointJson.setTag("pointget");
+		AppApplication.getHttpRequestQueue().add(pointJson);
+		AppApplication.getHttpRequestQueue().start();
+		return h;
+		
+	}
+		public static float getPointElevationTest(double latitude,double longitude) {				
+		String url = "http://192.168.253.3:8088/pointtest/servlet/WelcomeUserServlet?lat="+latitude+"&lng="+longitude;
+		
+		JsonObjectRequest pointJsonTest = new JsonObjectRequest(Method.GET,url,null,
 				new Listener<JSONObject>() {
 					@Override
 					public void onResponse(JSONObject response) {
@@ -56,17 +96,19 @@ public class VolleyHttp {
 					@Override
 					public void onErrorResponse(VolleyError error) {
 						// TODO 自动生成的方法存根
-						Log.e("TAG", error.getMessage(), error);
+						Log.e("测试数据返回值", error.getMessage(), error);
 						h=0;
 						
 					}
 				});
-		pointJson.setTag("pointget");
-		AppApplication.getHttpRequestQueue().add(pointJson);
+
+		
+		pointJsonTest.setTag("pointget");
+		AppApplication.getHttpRequestQueue().add(pointJsonTest);
 		AppApplication.getHttpRequestQueue().start();
 		return h;
+		
 	}
-
 	public static elevationAndPointList postLineElevation(List<LatLng>Linelist) throws JSONException {
 		
 				

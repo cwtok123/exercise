@@ -190,7 +190,7 @@ public class PointElevation extends Activity implements OnGetGeoCoderResultListe
 		
 		LatLng llText = new LatLng(result.getLocation().latitude, result.getLocation().longitude);
         OverlayOptions ooText = new TextOptions().bgColor(0x00FFFF00)
-                .fontSize(30).fontColor(0xFFFF00FF).text(strInfo).rotate(0)
+                .fontSize(50).fontColor(0xFFFF00FF).text(strInfo).rotate(0)
                 .position(llText);
         mBaiduMap.addOverlay(ooText);
 	}
@@ -218,7 +218,7 @@ public class PointElevation extends Activity implements OnGetGeoCoderResultListe
 		
 		LatLng llText = new LatLng(result.getLocation().latitude, result.getLocation().longitude);
         OverlayOptions ooText = new TextOptions().bgColor(0x00FFFF00)
-                .fontSize(30).fontColor(0xFFFF00FF).text(result.getAddress()+strInfo).rotate(0)
+                .fontSize(50).fontColor(0xFFFF00FF).text(result.getAddress()+strInfo).rotate(0)
                 .position(llText);
         mBaiduMap.addOverlay(ooText);		
 
@@ -237,7 +237,7 @@ public class PointElevation extends Activity implements OnGetGeoCoderResultListe
         
 		String strInfo = String.format("纬度：%3.3f 经度：%3.3f 海拔：%3.3f",point.latitude, point.longitude, h);
         OverlayOptions ooText = new TextOptions().bgColor(0x00FFFF00)
-                .fontSize(30).fontColor(0xFFFF00FF).text(strInfo).rotate(0)
+                .fontSize(50).fontColor(0xFFFF00FF).text(strInfo).rotate(0)
                 .position(point);
         mBaiduMap.addOverlay(ooText);
         

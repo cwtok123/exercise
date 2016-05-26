@@ -19,6 +19,7 @@ public class MainActivity extends Activity {
 	private Button btn3;
 	private Button btn4;
 	private Button btn5;
+	private Button btn6;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +30,7 @@ public class MainActivity extends Activity {
 		btn3 = (Button) findViewById(R.id.routeQuery);
 		btn4 = (Button) findViewById(R.id.pointElevation);
 		btn5 = (Button) findViewById(R.id.lineElevation);
+		btn6 = (Button) findViewById(R.id.Button01);
 		button();
 	}
 	private void button(){
@@ -72,6 +74,15 @@ public class MainActivity extends Activity {
 				startActivity(new Intent(MainActivity.this,LineElevation.class));
 			}
 		});
+		btn6.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO 自动生成的方法存根
+				startActivity(new Intent(MainActivity.this,PointElevationTest.class));
+			}
+		});
+		
 	}
 	
 

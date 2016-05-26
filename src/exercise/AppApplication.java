@@ -10,8 +10,8 @@ public class AppApplication extends Application {
 
 	public static RequestQueue requestQueue;
 	
-    public static String entityName = "小米4c1";  // entity标识
-    public static long serviceId = 115376;// 鹰眼服务ID
+    public static String entityName = "空数吴彦祖的小米4C";  // entity标识
+    public static long serviceId = 117640;// 鹰眼服务ID
     
 	@Override
 	public void onCreate() {
